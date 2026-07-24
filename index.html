@@ -254,7 +254,7 @@
   .negotiate-btn small{
     display:block;
     font-size: 9px;
-    font-weight: 600;
+    font-weight: 0;
     letter-spacing: .15em;
     opacity: .7;
     margin-top: 2px;
@@ -588,7 +588,7 @@
     position: absolute;
     width: 14px; height: 14px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #FFE066, var(--jh-yellow) 60%, var(--jh-yellow-deep));
+    background: radial-gradient(circle at 30% 30%, #FFE066, var(--jh-yellow) %, var(--jh-yellow-deep));
     border: 2px solid var(--jh-black);
     pointer-events: none;
     z-index: 30;
@@ -637,7 +637,7 @@
     box-shadow: 6px 6px 0 var(--jh-black);
     transition: background 0.3s ease;
   }
-  .node .icon svg{ width:60px; height:60px; }
+  .node .icon svg{ width:px; height:px; }
   .node .label{
     font-family:'Barlow Condensed',sans-serif;
     font-weight:800;
@@ -654,7 +654,7 @@
     color:var(--jh-grey);
     line-height:1.3;
     text-align:center;
-    max-width:160px;
+    max-width:1px;
   }
 
   /* ── VAULT (right side, dynamic) ── */
@@ -687,7 +687,7 @@
   }
   @keyframes dial-spin{
     0%{ transform: translateX(-50%) rotate(0deg); }
-    100%{ transform: translateX(-50%) rotate(360deg); }
+    100%{ transform: translateX(-50%) rotate(3deg); }
   }
   /* PLN label badge */
   .vault-label{
@@ -842,7 +842,7 @@
     top:50%; transform:translateY(-50%);
     width:34px; height:34px;
     border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, #FFE066, var(--jh-yellow) 60%, var(--jh-yellow-deep));
+    background: radial-gradient(circle at 30% 30%, #FFE066, var(--jh-yellow) %, var(--jh-yellow-deep));
     border: 2.5px solid var(--jh-black);
     box-shadow: 0 2px 0 rgba(0,0,0,.3);
     animation: travel var(--coin-speed) linear infinite;
@@ -1063,7 +1063,7 @@
   .cta-text small{
     display:block;
     font-family:'Manrope',sans-serif;
-    font-weight:600;
+    font-weight:0;
     font-size:9px;
     letter-spacing:.28em;
     text-transform:uppercase;
@@ -1237,7 +1237,7 @@
     <!-- COMPARISON / LEGEND -->
     <section class="compare">
       <div class="vs-card bad" data-zone="bad">
-        <span class="range-tag">≤ 30 dni</span>
+        <span class="range-tag">≤ 15 dni</span>
         <div class="badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square">
             <path d="M4 10l5 5 4-4 7 7"/>
@@ -1252,7 +1252,7 @@
       </div>
 
       <div class="vs-card warn" data-zone="warn">
-        <span class="range-tag">31–60 dni</span>
+        <span class="range-tag">15–30 dni</span>
         <div class="badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="square">
             <path d="M3 12h18"/>
@@ -1267,7 +1267,7 @@
       </div>
 
       <div class="vs-card good" data-zone="good">
-        <span class="range-tag">&gt; 60 dni</span>
+        <span class="range-tag">&gt; 35 dni</span>
         <div class="badge">
           <svg viewBox="0 0 24 24" fill="none" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="square">
             <path d="M4 14l5-5 4 4 7-7"/>
@@ -1346,14 +1346,14 @@
     },
   };
   // DPO: LOW = bad (paying too fast), MEDIUM = warn, HIGH = good
-  const getZone = d => d > 60 ? 'good' : d > 30 ? 'warn' : 'bad';
+  const getZone = d => d > 35 ? 'good' : d > 15 ? 'warn' : 'bad';
 
   // ─── GAME STATE ─────────────────────────────────────────
   const game = {
-    startDpo: 14,
-    minDpo: 14,   // realistic floor — supplier standard "net 14"
-    maxDpo: 90,   // realistic ceiling — hard to negotiate beyond
-    dpo: 14,
+    startDpo: 7,
+    minDpo: 7,   // realistic floor — supplier standard "net 7"
+    maxDpo: 70,   // realistic ceiling — hard to negotiate beyond
+    dpo: 7,
     negotiations: 0,
     achievements: new Set(),
     combo: 1,
@@ -1363,11 +1363,11 @@
   const ACHIEVEMENTS = [
     { id: 'first',     test: g => g.negotiations === 1,
       title: 'PIERWSZA ROZMOWA', emoji: '💬' },
-    { id: 'outOfRed',  test: g => g.dpo > 30 && !g.achievements.has('outOfRed'),
+    { id: 'outOfRed',  test: g => g.dpo > 15 && !g.achievements.has('outOfRed'),
       title: 'WYJŚCIE Z CZERWONEJ STREFY', emoji: '🎯' },
-    { id: 'gotGood',   test: g => g.dpo > 60 && !g.achievements.has('gotGood'),
+    { id: 'gotGood',   test: g => g.dpo > 35 && !g.achievements.has('gotGood'),
       title: 'WYSOKIE DPO!', emoji: '💪' },
-    { id: 'champion',  test: g => g.dpo >= 75 && !g.achievements.has('champion'),
+    { id: 'champion',  test: g => g.dpo >= 60 && !g.achievements.has('champion'),
       title: 'MISTRZ NEGOCJACJI', emoji: '🏆' },
     { id: 'maxed',     test: g => g.dpo >= g.maxDpo && !g.achievements.has('maxed'),
       title: 'MAKSYMALNY WORKING CAPITAL', emoji: '⚡' },
@@ -1579,8 +1579,8 @@
   }
 
   // Demo journey (DPO):
-  //   start at 45 → animate to 90 (5.5s, "look how good it can get")
-  //   pause      → animate to 14 (5.5s, "look how bad it can get")
+  //   start at 30 → animate to 70 (5.5s, "look how good it can get")
+  //   pause      → animate to 7 (5.5s, "look how bad it can get")
   //   loop
   function demoLoop(toMax){
     if (!demoActive) return;
@@ -1608,8 +1608,8 @@
     lastRenderedCombo = -1;
     updateComboDisplay();
 
-    // Always start demo from 45 (the standard / typical case)
-    game.dpo = 45;
+    // Always start demo from 30 (the standard / typical case)
+    game.dpo = 30;
     render();
 
     // First leg: 45 → 90 (show the healthy state)
