@@ -583,8 +583,8 @@
     border: 3px solid transparent;
   }
 
-  /* coin-burst: tiny coin icons that fly toward the vault on negotiation */
-  .coin-burst{
+  /* -burst: tiny  icons that fly toward the vault on negotiation */
+  .-burst{
     position: absolute;
     width: 14px; height: 14px;
     border-radius: 50%;
@@ -828,7 +828,7 @@
       var(--zone-stripe) 22px,
       var(--zone-stripe) 44px
     );
-    animation: slide var(--coin-speed) linear infinite;
+    animation: slide var(---speed) linear infinite;
     transition: background-image 0.4s ease;
   }
   @keyframes slide{
@@ -842,7 +842,7 @@
     top:50%; transform:translateY(-50%);
     width:34px; height:34px;
     border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, #FFE066, var(--jh-yellow) %, var(--jh-yellow-deep));
+    background: radial-gradient(circle at 30% 30%, #FFE066, var(--jh-yellow) 60%, var(--jh-yellow-deep) 100%);
     border: 2.5px solid var(--jh-black);
     box-shadow: 0 2px 0 rgba(0,0,0,.3);
     animation: travel var(--coin-speed) linear infinite;
